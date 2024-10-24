@@ -280,6 +280,14 @@
       </a>
     </div>
   </header>
+  <!-- 新しく追加する要素 -->
+  <div id="valid-certificate-message" style="display:none;">
+    認証が成功しました！
+  </div>
+  <div id="invalid-certificate-message" style="display:none;">
+    認証に失敗しました。
+  </div>
+
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
 {%- if settings.cart_type == "notification" -%}
