@@ -9,22 +9,22 @@ function getUrlParameter(name) {
 const pieceCollectionParam = getUrlParameter('piece_collection');
 console.log(pieceCollectionParam)
 if (pieceCollectionParam) {
-    fetch(`https://pcoll-verify-certificate.azurewebsites.net/api/VerifyCertificate`, {
-        method: 'POST',
-        mode:"cors",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ parameter: pieceCollectionParam }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        if (data.result == "OK") {
-            document.getElementById('valid-certificate-message').style.display = 'block';
-        } else {
-            document.getElementById('invalid-certificate-message').style.display = 'block';
-        }
-    })
-    .catch(error => console.error('Error:', error));
+  axios.post('https://pcoll-verify-certificate.azurewebsites.net/api/VerifyCertificate', {
+    parameter: pieceCollectionParam
+  }, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    console.log(response.data);
+    if (response.data.result === "OK") {
+      document.getElementById('valid-certificate-message').style.display = 'block';
+    } else {
+      document.getElementById('invalid-certificate-message').style.display = 'block';
+    }
+  })
+  .catch(error => {
+    console.error('エラー:', error);
+  });
 }
